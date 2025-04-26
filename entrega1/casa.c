@@ -7,7 +7,7 @@
 int window; 
 
 void InitGL(int Width, int Height){
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);		// This Will Clear The Background Color To Black
+    glClearColor(0.95f, 0.5f, 0.3f, 1.0f);		// This Will Clear The Background Color To Black
     glClearDepth(1.0);				// Enables Clearing Of The Depth Buffer
     glDepthFunc(GL_LESS);				// The Type Of Depth Test To Do
     glEnable(GL_DEPTH_TEST);			// Enables Depth Testing
@@ -62,6 +62,15 @@ void DrawGLScene(){
         glVertex3f(-2.2, 2.3f, -1.0f);   
     glEnd();
 
+    // Porta
+    glColor3f(0.7, 0.9, 0.3);
+    glBegin(GL_QUADS);
+        glVertex3f(-2.3, -1.6f, -1.0f);   
+        glVertex3f(-1.7, -1.6f, -1.0f);   
+        glVertex3f(-1.7, -0.5f, -1.0f); 
+        glVertex3f(-2.3, -0.5f, -1.0f); 
+    glEnd();
+
     // Parede da frente
     glColor3f(0.7, 0.2, 0.3);
     glBegin(GL_QUADS);
@@ -69,6 +78,24 @@ void DrawGLScene(){
         glVertex3f(-1.2, -1.6f, -1.0f);   
         glVertex3f(-1.2, 0.4f, -1.0f); 
         glVertex3f(-3.2, 0.4f, -1.0f); 
+    glEnd();
+
+    // Janela esquerda
+    glColor3f(0.6, 0.2, 1.0);
+    glBegin(GL_QUADS);   
+        glVertex3f(-0.5, -0.9f, -1.0f); 
+        glVertex3f(0.2, -0.9f, -1.0f);  
+        glVertex3f(0.2, -0.4f, -1.0f); 
+        glVertex3f(-0.5, -0.4f, -1.0f); 
+    glEnd();
+
+    // Janela direita
+    glColor3f(0.6, 0.2, 1.0);
+    glBegin(GL_QUADS);   
+        glVertex3f(1.5, -0.9f, -1.0f); 
+        glVertex3f(2.2, -0.9f, -1.0f);  
+        glVertex3f(2.2, -0.4f, -1.0f); 
+        glVertex3f(1.5, -0.4f, -1.0f); 
     glEnd();
 
     // Parede lateral
@@ -96,6 +123,17 @@ void DrawGLScene(){
         glVertex3f(1.1, 3.1f, -1.0f);  
         glVertex3f(1.1, 3.5f, -1.0f); 
         glVertex3f(-0.3, 3.5f, -1.0f); 
+    glEnd();
+
+    glColor3f(0.3f, 0.6f, 0.2f); // cor do chão
+
+    // Cor do chão (verde)
+    glColor3f(0.3f, 0.6f, 0.2f); 
+    glBegin(GL_QUADS);
+        glVertex3f(-4.0f, -0.4f, -1.0f); // canto inferior esquerdo
+        glVertex3f( 4.0f, -0.4f, -1.0f); // canto inferior direito
+        glVertex3f( 4.0f, -2.8f, -1.0f); // canto superior direito
+        glVertex3f(-4.0f, -2.8f, -1.0f); // canto superior esquerdo
     glEnd();
 
     // since this is double buffered, swap the buffers to display what just got drawn.
