@@ -23,19 +23,20 @@ void InitGL(int Width, int Height){
 }
 
 void ReSizeGLScene(int Width, int Height){
-    if (Height == 0)				// Prevent A Divide By Zero If The Window Is Too Small
-        Height = 1;
+    if (Height == 0) Height = 1;
 
-    glViewport(0, 0, Width, Height);		// Reset The Current Viewport And Perspective Transformation
-
+    glViewport(0, 0, Width, Height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    // Adjust the orthogonal projection to match the new window size
-    glOrtho(-Width / 200.0f, Width / 200.0f, -Height / 200.0f, Height / 200.0f, 0.1f, 100.0f);
-    //x de -3.2 até +3.2
-    //y de -2.4 até +2.4
-    //z de 0.1 até 100.0
+    float aspect = (float)Width / (float)Height;
+
+    if (aspect >= 1.0f) {
+        glOrtho(-aspect * 5.0f, aspect * 5.0f, -5.0f, 5.0f, 0.1f, 100.0f);
+    } else {
+        glOrtho(-5.0f, 5.0f, -5.0f / aspect, 5.0f / aspect, 0.1f, 100.0f);
+    }
+
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -108,7 +109,7 @@ int main(int argc, char **argv){
     glutInitWindowSize(800, 800);  
 
     /* the window starts at the upper left corner of the screen */
-    glutInitWindowPosition(100, 100);  
+    glutInitWindowPosition(100, 0);  
 
     /* Open a window */  
     window = glutCreateWindow("Casa");  
