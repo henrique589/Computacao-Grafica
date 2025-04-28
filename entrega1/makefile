@@ -2,10 +2,10 @@
 
 CC = gcc
 CFLAGS = -Wall -g
-LDFLAGS = -lGL -lGLU -lglut
+LDFLAGS = -lGL -lGLU -lglut -lm
 
-TARGET = casa
-SRC = casa.c
+TARGET = lesson1
+SRC = lesson1.c
 
 all: $(TARGET)
 
