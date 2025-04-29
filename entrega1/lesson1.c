@@ -8,6 +8,10 @@
 #define M_PI 3.14159265358979323846
 #endif
 
+int frameCount = 0;
+int smokeDirection = 1; // 1: indo pra direita, -1: voltando
+float smokeOffset = 0.0f;
+
 /* The number of our GLUT window */
 int window; 
 
@@ -242,11 +246,32 @@ void DrawGLScene(){
     glEnd();
 
     //Fumaça
-    centroX = 0.95f, centroY = 3.45f, raio = 0.5f;
+    centroX = 0.95f + smokeOffset;
+    centroY = 3.45f;
+    raio = 0.5f;
     numLados = 100;
-    
+
     for(int j = 0; j < 3; j++){
         glColor3f(0.5f, 0.5f, 0.5f);
+        glBegin(GL_TRIANGLE_FAN);
+            glVertex3f(centroX, centroY, -1.0f);
+            for(int i = 0; i <= numLados; i++){
+                float angulo = 2.0f * M_PI * i / numLados;
+                float x = centroX + raio * cos(angulo);
+                float y = centroY + raio * sin(angulo);
+                glVertex3f(x, y, 0.3f);
+            }
+        glEnd();
+        centroX += 0.5f;
+        centroY += 0.1f;
+    }
+
+    // Nuvem
+    centroX = -4.0f, centroY = 3.6f, raio = 0.5f;
+    numLados = 100;
+    
+    for(int j = 0; j < 4; j++){
+        glColor3f(1.0f, 1.0f, 1.0f);
         glBegin(GL_TRIANGLE_FAN);
             glVertex3f(centroX, centroY, -1.0f);
             for(int i = 0; i <= numLados; i++){
@@ -255,10 +280,41 @@ void DrawGLScene(){
                 float y = centroY + raio * sin(angulo);
                 glVertex3f(x, y, 0.3f);
             }
-            glEnd();
-            centroX += 0.5f;
-            centroY += 0.1f;
+        glEnd();
+        centroX += 0.45f;
+        centroY += 0.1f;
     }
+    
+    centroX = -3.8f, centroY = 3.45f, raio = 0.5f;
+    numLados = 100;
+    
+    for(int j = 0; j < 2; j++){
+        glColor3f(1.0f, 1.0f, 1.0f);
+        glBegin(GL_TRIANGLE_FAN);
+            glVertex3f(centroX, centroY, -1.0f);
+            for(int i = 0; i <= numLados; i++){
+                float angulo = 2.0f * M_PI * i/numLados;
+                float x = centroX + raio * cos(angulo);
+                float y = centroY + raio * sin(angulo);
+                glVertex3f(x, y, 0.3f);
+            }
+        glEnd();
+        centroX += 0.45f;
+        centroY += 0.1f;
+    }
+
+    // Atualiza deslocamento da fumaça
+    if (frameCount % 20 == 0) { // ajusta esse valor para controlar a velocidade
+        smokeOffset += 0.1f * smokeDirection;
+
+        if (smokeOffset >= 0.4f) { 
+            smokeDirection = -1;
+        } else if (smokeOffset <= 0.0f) {
+            smokeDirection = 1;
+        }
+    }
+
+    frameCount++;
 
     // since this is double buffered, swap the buffers to display what just got drawn.
     glutSwapBuffers();
