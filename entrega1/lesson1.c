@@ -288,7 +288,7 @@ void DrawGLScene(){
     centroX = -3.8f, centroY = 3.45f, raio = 0.5f;
     numLados = 100;
     
-    for(int j = 0; j < 2; j++){
+    for(int j = 0; j < 3; j++){
         glColor3f(1.0f, 1.0f, 1.0f);
         glBegin(GL_TRIANGLE_FAN);
             glVertex3f(centroX, centroY, -1.0f);
@@ -313,7 +313,6 @@ void DrawGLScene(){
             smokeDirection = 1;
         }
     }
-
     frameCount++;
 
     // since this is double buffered, swap the buffers to display what just got drawn.
