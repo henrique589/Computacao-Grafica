@@ -1,8 +1,8 @@
-#include <GL/glut.h>    // Header File For The GLUT Library 
-#include <GL/gl.h>	// Header File For The OpenGL32 Library
-#include <GL/glu.h>	// Header File For The GLu32 Library
-#include <unistd.h>     // Header file for sleeping.
-#include <math.h>
+#include <GL/glut.h> 
+#include <GL/gl.h>	
+#include <GL/glu.h>	
+#include <unistd.h>    
+#include <math.h> // ADICIONAR -lm no makefile
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -12,7 +12,6 @@ int frameCount = 0;
 int smokeDirection = 1; // 1: indo pra direita, -1: voltando
 float smokeOffset = 0.0f;
 
-/* The number of our GLUT window */
 int window; 
 
 void InitGL(int Width, int Height){
