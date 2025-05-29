@@ -105,7 +105,15 @@ void Desenha(void)
                 glScalef(20.0f, 40.0f, 1.0f);
                 glColor3f(0.5f, 0.25f, 0.0f);
                 desenhaQuadrado();
-            glPopMatrix();    
+            glPopMatrix();   
+
+            //Caminho até a porta
+            glPushMatrix();
+                glTranslatef(0.0f, -80.0f, 0.0f); 
+                glScalef(20.0f, 120.0f, 1.0f);
+                glColor3f(0.7f, 0.7f, 0.7f);
+                desenhaQuadrado();
+            glPopMatrix();
 
             //Maçaneta
             glPushMatrix();
