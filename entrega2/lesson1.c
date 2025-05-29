@@ -63,11 +63,23 @@ void Desenha(void)
     glLoadIdentity();
 
     //Define a escala da casa com base no menor lado da janela
-    GLfloat escala = fmin(windowWidth, windowHeight) / 500.0f;
+    GLfloat escala = fmin(windowWidth, windowHeight) / 350.0f;
 
     //Centraliza a casa e aplica escala
     glTranslatef(windowWidth / 2.0f, windowHeight / 2.0f, 0.0f);
     glScalef(escala, escala, 1.0f);
+
+    // Grama
+    glPushMatrix();
+        glLoadIdentity();
+        glColor3f(0.5f, 0.8f, 0.3f); 
+        glBegin(GL_QUADS);
+            glVertex2f(0.0f, 0.0f);                   
+            glVertex2f(windowWidth, 0.0f);            
+            glVertex2f(windowWidth, windowHeight / 3.0f); 
+            glVertex2f(0.0f, windowHeight / 3.0f);         
+        glEnd();
+    glPopMatrix();
 
     //Parede da frente
     glPushMatrix();
@@ -78,18 +90,26 @@ void Desenha(void)
             desenhaQuadrado();
         glPopMatrix();  
 
+        //Janela da frente
+        glPushMatrix();
+            glTranslatef(-15.0f, -5.0f, 0.0f);
+            glScalef(15.0f, 15.0f, 1.0f);
+            glColor3f(0.9f, 0.95f, 1.0f);
+            desenhaQuadrado();
+        glPopMatrix();
+
         //Porta
         glPushMatrix();
-            glTranslatef(+10.0f, -15.0f, 0.0f);
+            glTranslatef(+10.0f, -10.0f, 0.0f);
             glPushMatrix();
-                glScalef(15.0f, 30.0f, 1.0f);
+                glScalef(20.0f, 40.0f, 1.0f);
                 glColor3f(0.5f, 0.25f, 0.0f);
                 desenhaQuadrado();
             glPopMatrix();    
 
             //Maçaneta
             glPushMatrix();
-                glTranslatef(3.0f, -2.0f, 0.0f);
+                glTranslatef(4.0f, -2.0f, 0.0f);
                 glScalef(2.0f, 2.0f, 1.0f);
                 glColor3f(1.0f, 1.0f, 0.0f);
                 desenhaCirculo();
@@ -97,7 +117,7 @@ void Desenha(void)
 
             //Olho mágico
             glPushMatrix();
-                glTranslatef(0.0f, +5.5f, 0.0f);
+                glTranslatef(0.0f, 9.0f, 0.0f);
                 glScalef(1.0f, 1.0f, 1.0f);
                 glColor3f(0.7f, 0.85f, 1.0f);
                 desenhaCirculo();
@@ -149,13 +169,99 @@ void Desenha(void)
         glPopMatrix();
 
 		// Telhado lateral
-		glPushMatrix();
-			glTranslatef(0.0f, 60.0f, 0.0f); 
-			glScalef(120.0f, 60.0f, 1.0f);      
-			glColor3f(0.5f, 0.2f, 0.15f);       
-			skewX(atan(-0.5));                   
-			desenhaQuadrado();
-		glPopMatrix();
+        glPushMatrix();
+            glTranslatef(-15.0f, 60.0f, 0.0f);
+            glPushMatrix();
+                glScalef(120.0f, 60.0f, 1.0f);
+                skewX(-atan(0.25)); 
+                glColor3f(0.7f, 0.3f, 0.2f);
+                desenhaQuadrado();
+            glPopMatrix();
+
+            //Quadrado chaminé
+            glTranslatef(10.0f, 30.0f, 0.0f);
+            glPushMatrix();
+                glScalef(20.0f, 20.0f,  1.0f);
+                glColor3f(0.8f, 0.5f, 0.3f);
+                desenhaQuadrado();
+            glPopMatrix();
+
+            //Retângulo chaminé
+            glTranslatef(0.0f, 15.0f, 0.0f);
+            glPushMatrix();
+                glScalef(40.0f, 10.0f,  1.0f);
+                glColor3f(0.8f, 0.5f, 0.3f);
+                desenhaQuadrado();
+            glPopMatrix();
+
+            //Fumaça
+            glTranslatef(0.0f, 25.0f, 0.0f);
+            glColor3f(0.5f, 0.5f, 0.5f);
+            // Primeiro círculo 
+            glPushMatrix();
+                glScalef(12.0f, 12.0f, 1.0f);
+                desenhaCirculo();
+            glPopMatrix();
+
+            // Segundo círculo 
+            glPushMatrix();
+                glTranslatef(10.0f, 10.0f, 0.0f);
+                glScalef(12.0f, 12.0f, 1.0f);
+                desenhaCirculo();
+            glPopMatrix();
+
+            // Terceiro círculo 
+            glPushMatrix();
+                glTranslatef(20.0f, 20.0f, 0.0f);
+                glScalef(12.0f, 12.0f, 1.0f);
+                desenhaCirculo();
+            glPopMatrix();
+        glPopMatrix();
+    glPopMatrix();
+
+    //Sol
+    glPushMatrix();
+        glTranslatef(120.0f, 120.0f, 0.0f);
+        glScalef(20.0f, 20.0f, 0.0f);
+        glColor3f(1.0f, 1.0f, 0.0f);
+        desenhaCirculo();
+    glPopMatrix();
+
+    //Nuvem
+    glTranslatef(-120.0f, 120.0f, 0.0f);
+    glColor3f(1.0f, 1.0f, 1.0f);
+    // Primeiro círculo 
+    glPushMatrix();
+        glScalef(14.0f, 14.0f, 1.0f);
+        desenhaCirculo();
+    glPopMatrix();
+
+    // Segundo círculo 
+    glPushMatrix();
+        glTranslatef(20.0f, 0.0f, 0.0f);
+        glScalef(14.0f, 14.0f, 1.0f);
+        desenhaCirculo();
+    glPopMatrix();
+
+    // Terceiro círculo 
+    glPushMatrix();
+        glTranslatef(40.0f, 0.0f, 0.0f);
+        glScalef(14.0f, 14.0f, 1.0f);
+        desenhaCirculo();
+    glPopMatrix();
+
+    // Quarto círculo 
+    glPushMatrix();
+        glTranslatef(15.0f, -10.0f, 0.0f);
+        glScalef(14.0f, 14.0f, 1.0f);
+        desenhaCirculo();
+    glPopMatrix();
+
+    // Quinto círculo 
+    glPushMatrix();
+        glTranslatef(30.0f, -10.0f, 0.0f);
+        glScalef(14.0f, 14.0f, 1.0f);
+        desenhaCirculo();
     glPopMatrix();
 
     glutSwapBuffers();
@@ -163,7 +269,7 @@ void Desenha(void)
 
 void Inicializa(void)
 {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.5f, 0.7f, 0.9f, 1.0f);
 }
 
 void AlteraTamanhoJanela(GLsizei w, GLsizei h)
