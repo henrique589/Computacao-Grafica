@@ -2,9 +2,10 @@
 Repositório da matéria de Computação Gráfica
 
 ![Animação da casinha](./assets/4txb2t1.gif)
-
+---
 &nbsp;
 
+##🧱 Versão 2 
 ![Imagem casinha versão 2](./assets/entrega2.png)
 
 ## 🏠 Descrição do projeto
