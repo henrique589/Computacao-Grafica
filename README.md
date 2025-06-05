@@ -3,6 +3,10 @@ Repositório da matéria de Computação Gráfica
 
 ![Animação da casinha](./assets/4txb2t1.gif)
 
+&nbsp;
+
+![Imagem casinha versão 2](./assets/entrega2.png)
+
 ## 🏠 Descrição do projeto
 Este projeto representa a modelagem de uma casa estilizada utilizando OpenGL em modo 2D com projeção ortogonal, desenvolvido como parte da disciplina de Computação Gráfica. A cena contempla diversos elementos geométricos para compor uma paisagem harmoniosa e detalhada, incluindo:
 Casa com telhado, chaminé, porta e janelas;
