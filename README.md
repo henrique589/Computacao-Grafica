@@ -5,7 +5,7 @@ Repositório da matéria de Computação Gráfica
 ---
 &nbsp;
 
-##🧱 Versão 2 
+## 🧱 Versão 2 
 ![Imagem casinha versão 2](./assets/entrega2.png)
 
 ## 🏠 Descrição do projeto
