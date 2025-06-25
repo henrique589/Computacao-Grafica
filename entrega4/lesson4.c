@@ -79,21 +79,32 @@ void drawClippedLine(float x0, float y0, float x1, float y1) {
     float cx0, cy0, cx1, cy1;
     int accepted = cohenSutherlandClip(x0, y0, x1, y1, &cx0, &cy0, &cx1, &cy1);
 
-    // Parte fora (vermelha)
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glBegin(GL_LINES);
-        glVertex2f(x0, y0);
-        glVertex2f(cx0, cy0);
-        glVertex2f(x1, y1);
-        glVertex2f(cx1, cy1);
-    glEnd();
-
-    // Parte dentro (azul)
     if (accepted) {
+        // Desenhar partes vermelhas apenas se forem diferentes dos recortados
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glBegin(GL_LINES);
+            if (x0 != cx0 || y0 != cy0) {
+                glVertex2f(x0, y0);
+                glVertex2f(cx0, cy0);
+            }
+            if (x1 != cx1 || y1 != cy1) {
+                glVertex2f(x1, y1);
+                glVertex2f(cx1, cy1);
+            }
+        glEnd();
+
+        // Parte dentro (azul)
         glColor3f(0.0f, 0.0f, 1.0f);
         glBegin(GL_LINES);
             glVertex2f(cx0, cy0);
             glVertex2f(cx1, cy1);
+        glEnd();
+    } else {
+        // Totalmente fora — desenha toda em vermelho
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glBegin(GL_LINES);
+            glVertex2f(x0, y0);
+            glVertex2f(x1, y1);
         glEnd();
     }
 }
